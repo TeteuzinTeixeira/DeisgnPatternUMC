@@ -1,0 +1,41 @@
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/Aula 01
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/Aula 01.deps.json
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/Aula 01.runtimeconfig.json
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/Aula 01.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/Aula 01.pdb
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/Aula 01.GeneratedMSBuildEditorConfig.editorconfig
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/Aula 01.AssemblyInfoInputs.cache
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/Aula 01.AssemblyInfo.cs
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/Aula 01.csproj.CoreCompileInputs.cache
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/Aula 01.sourcelink.json
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/Aula 01.dll
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/refint/Aula 01.dll
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/Aula 01.pdb
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/Aula 01.genruntimeconfig.cache
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/ref/Aula 01.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/Google.Protobuf.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/K4os.Compression.LZ4.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/K4os.Compression.LZ4.Streams.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/K4os.Hash.xxHash.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/Microsoft.Win32.SystemEvents.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/MySql.Data.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/System.Configuration.ConfigurationManager.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/System.Drawing.Common.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/System.IO.Pipelines.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/System.Security.Cryptography.ProtectedData.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/System.Security.Permissions.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/System.Windows.Extensions.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/ZstdSharp.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/runtimes/win-x64/native/comerr64.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/runtimes/win-x64/native/gssapi64.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/runtimes/win-x64/native/k5sprt64.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/runtimes/win-x64/native/krb5_64.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/runtimes/win-x64/native/krbcc64.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
+/home/teteu/Documents/Aula 01/bin/Debug/net8.0/runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/Aula 01.csproj.AssemblyReference.cache
+/home/teteu/Documents/Aula 01/obj/Debug/net8.0/Aula 01.csproj.CopyComplete
