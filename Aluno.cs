@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Globalization;
 
 class Aluno
 {
@@ -49,26 +50,103 @@ class Aluno
             using var crud = new MySqlConnection(cs);
             crud.Open();
 
-            Console.WriteLine("Digite o nome do aluno: ");
-            string nome = Console.ReadLine();
-            Console.WriteLine("Digite o RGM do aluno: ");
-            long rgm = long.Parse(Console.ReadLine());
-            Console.WriteLine("Digite a data de nascimento do aluno (YYYY-MM-DD): ");
-            string dataNasc = Console.ReadLine();
-            Console.WriteLine("Digite o curso do aluno: ");
-            string curso = Console.ReadLine();
+            string nome;
+            do
+            {
+                Console.WriteLine("*Digite o nome do aluno: ");
+                nome = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(nome))
+                {
+                    Console.WriteLine("O campo Nome não pode estar vazio.");
+                }
+            } while (string.IsNullOrEmpty(nome));
+
+            long? rgm = null;
+            do
+            {
+                Console.WriteLine("*Digite o RGM do aluno (somente numeros): ");
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(input))
+                {
+                    Console.WriteLine("O campo RGM não pode estar vazio.");
+                }
+                else if (input.Length != 11)
+                {
+                    Console.WriteLine("O RGM deve ter exatamente 11 caracteres.");
+                }
+                else if (!long.TryParse(input, out long value))
+                {
+                    Console.WriteLine("Valor de RGM inválido.");
+                }
+                else
+                {
+                    rgm = value;
+                }
+            } while (!rgm.HasValue);
+
+            string dataNasc;
+            DateTime dataNascimento;
+
+            do
+            {
+                Console.WriteLine("*Digite a data de nascimento do aluno (YYYY-MM-DD): ");
+                dataNasc = Console.ReadLine();
+
+                if (!DateTime.TryParseExact(dataNasc, "yyyy-MM-dd", null, DateTimeStyles.None, out dataNascimento))
+                {
+                    Console.WriteLine("Formato de data inválido.");
+                }
+            } while (dataNascimento == DateTime.MinValue);
+
+            string curso;
+            do
+            {
+                Console.WriteLine("*Digite o curso do aluno: ");
+                curso = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(curso))
+                {
+                    Console.WriteLine("O campo curso não pode estar vazio.");
+                }
+            } while (string.IsNullOrEmpty(curso));
+
             Console.WriteLine("O aluno é bolsista? (1 para sim, 0 para não): ");
             int bolsista = int.Parse(Console.ReadLine());
-            Console.WriteLine("Digite o RG do aluno: ");
-            long rg = int.Parse(Console.ReadLine());
-            Console.WriteLine("Digite o gênero do aluno: ");
+
+            long? rg = null;
+            do
+            {
+                Console.WriteLine("*Digite o rg do aluno (somente numeros): ");
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(input))
+                {
+                    Console.WriteLine("O campo rg não pode estar vazio.");
+                }
+                else if (input.Length > 11)
+                {
+                    Console.WriteLine("O rg deve ter 11 caracteres ou menos.");
+                }
+                else if (!long.TryParse(input, out long value))
+                {
+                    Console.WriteLine("Valor de rg inválido.");
+                }
+                else
+                {
+                    rg = value;
+                }
+            } while (!rg.HasValue);
+            
+            Console.WriteLine("*Digite o gênero do aluno: ");
             string genero = Console.ReadLine();
 
             var cmd = new MySqlCommand();
             cmd.Connection = crud;
 
             cmd.CommandText = "INSERT INTO Aluno(Nome, Rgm, DataNasc, Curso, Bolsista, RG, Genero) " +
-                              $"VALUES('{nome}', {rgm}, '{dataNasc}', '{curso}', {bolsista}, {rg}, '{genero}')";
+                            $"VALUES('{nome}', {rgm}, '{dataNasc}', '{curso}', {bolsista}, {rg}, '{genero}')";
 
             cmd.ExecuteNonQuery();
 
