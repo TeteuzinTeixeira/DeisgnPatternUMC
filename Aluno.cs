@@ -60,7 +60,12 @@ class Aluno
                 {
                     Console.WriteLine("O campo Nome não pode estar vazio.");
                 }
-            } while (string.IsNullOrEmpty(nome));
+                else if (nome.Length > 50)
+                {
+                    Console.WriteLine("O campo nome deve ter no máximo 50 caracteres.");
+                }
+            } while (string.IsNullOrEmpty(nome) || nome.Length > 50);
+
 
             long? rgm = null;
             do
@@ -109,8 +114,11 @@ class Aluno
                 if (string.IsNullOrEmpty(curso))
                 {
                     Console.WriteLine("O campo curso não pode estar vazio.");
+                }else if(curso.Length < 100 )
+                {
+                    Console.WriteLine("O campo deve ter no máximo 100 caracteres.");
                 }
-            } while (string.IsNullOrEmpty(curso));
+            } while (string.IsNullOrEmpty(curso) || curso.Length > 100);
 
             Console.WriteLine("O aluno é bolsista? (1 para sim, 0 para não): ");
             int bolsista = int.Parse(Console.ReadLine());
