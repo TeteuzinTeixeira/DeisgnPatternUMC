@@ -7,7 +7,7 @@ class Program
     {
         int opcao = 0;
         AlunoMenu aluno = new AlunoMenu();
-        // LivroMenu livro = new LivroMenu();
+        LivroMenu livro = new LivroMenu();
         do
         {
             Console.Clear();
@@ -25,9 +25,9 @@ class Program
                 case 1:
                     aluno.Menu(); 
                     break;
-                // case 2:
-                //     livro.LivroMenu();
-                //     break;
+                case 2:
+                    livro.Menu();
+                    break;
                 case 0:
                     Console.WriteLine("Feito por: \nMATEUS TEIXEIRA GOMES e IAGO DA SILVA LIMA");
                     return;

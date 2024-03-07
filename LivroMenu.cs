@@ -6,7 +6,6 @@ namespace Aula01 {
 
     class LivroMenu
     {
-
         public void Menu()
         {
             while (true)
@@ -34,12 +33,12 @@ namespace Aula01 {
                     case 2:
                         ListarLivros();
                         break;
-                    case 3:
-                        AtualizarLivro();
-                        break;
-                    case 4:
-                        DeletarLivros();
-                        break;
+                    // case 3:
+                    //     AtualizarLivro();
+                    //     break;
+                    // case 4:
+                    //     DeletarLivros();
+                    //     break;
                     case 0:
                         return;
                     default:
@@ -49,13 +48,13 @@ namespace Aula01 {
             }
         }
 
-        static void InserirLivro()
+        Livro livro = new Livro();
+        LivroDAO DAO = new LivroDAO();
+
+        public void InserirLivro()
         {
             try
             {
-                using var crud = new MySqlConnection(cs);
-                crud.Open();
-
                 string Titulo;
                 do
                 {
@@ -63,39 +62,39 @@ namespace Aula01 {
                     Console.WriteLine("*Inserir livro \n\n ");
 
                     Console.WriteLine("*Digite o nome do Livro: ");
-                    Titulo = Console.ReadLine();
+                    livro.setTitulo(Console.ReadLine());
 
-                    if (string.IsNullOrEmpty(Titulo))
+                    if (string.IsNullOrEmpty(livro.getTitulo()))
                     {
                         Console.WriteLine("O campo Livro não pode estar vazio.");
                     }
-                    else if (Titulo.Length > 50)
+                    else if (livro.getTitulo().Length > 50)
                     {
                         Console.WriteLine("O campo Livro deve ter no máximo 50 caracteres.");
                     }
-                } while (string.IsNullOrEmpty(Titulo) || Titulo.Length > 50);
+                } while (string.IsNullOrEmpty(livro.getTitulo()) || livro.getTitulo().Length > 50);
 
 
                 string Autor;
                 do
                 {
                     Console.WriteLine("*Digite o nome do Autor: ");
-                    Autor = Console.ReadLine();
+                    livro.setAutor(Console.ReadLine());
 
-                    if (string.IsNullOrEmpty(Titulo))
+                    if (string.IsNullOrEmpty(livro.getAutor()))
                     {
                         Console.WriteLine("O campo Autor não pode estar vazio.");
                     }
-                    else if (Autor.Length > 50)
+                    else if (livro.getAutor().Length > 50)
                     {
                         Console.WriteLine("O campo Autor deve ter no máximo 50 caracteres.");
                     }
-                } while (string.IsNullOrEmpty(Autor) || Autor.Length > 50);
+                } while (string.IsNullOrEmpty(livro.getAutor()) || livro.getAutor().Length > 50);
 
-                int? Ano = null;
+                int Ano = 0;
                 do
                 {
-                    Console.WriteLine("*Digite o ano do livro (somente numeros): ");
+                    Console.WriteLine("*Digite o ano do livro (somente números): ");
                     string input = Console.ReadLine();
 
                     if (string.IsNullOrEmpty(input))
@@ -104,51 +103,50 @@ namespace Aula01 {
                     }
                     else if (input.Length != 4)
                     {
-                        Console.WriteLine("O ano deve ter 4 caracteres");
+                        Console.WriteLine("O ano deve ter 4 caracteres.");
                     }
                     else if (!int.TryParse(input, out int value))
                     {
-                        Console.WriteLine("Valor de rg inválido.");
+                        Console.WriteLine("Valor de ano inválido.");
                     }
                     else
                     {
+                        livro.setAno(value);
                         Ano = value;
                     }
-                } while (!Ano.HasValue);
+                } while (Ano == 0);
 
-                string Genero;
                 do
                 {
                     Console.WriteLine("*Digite o Genero do livro: ");
-                    Genero = Console.ReadLine();
+                    livro.setGenero(Console.ReadLine());
 
-                    if (string.IsNullOrEmpty(Genero))
+                    if (string.IsNullOrEmpty(livro.getGenero()))
                     {
                         Console.WriteLine("O campo Genero não pode estar vazio.");
                     }
-                    else if (Genero.Length > 100)
+                    else if (livro.getGenero().Length > 100)
                     {
                         Console.WriteLine("O campo Genero deve ter no máximo 100 caracteres.");
                     }
-                } while (string.IsNullOrEmpty(Genero) || Genero.Length > 100);
+                } while (string.IsNullOrEmpty(livro.getGenero()) || livro.getGenero().Length > 100);
 
-                string Editora;
                 do
                 {
                     Console.WriteLine("*Digite o Editora do livro: ");
-                    Editora = Console.ReadLine();
+                    livro.setEditora(Console.ReadLine());
 
-                    if (string.IsNullOrEmpty(Editora))
+                    if (string.IsNullOrEmpty(livro.getEditora()))
                     {
                         Console.WriteLine("O campo Editora não pode estar vazio.");
                     }
-                    else if (Editora.Length > 100)
+                    else if (livro.getEditora().Length > 100)
                     {
                         Console.WriteLine("O campo Editora deve ter no máximo 100 caracteres.");
                     }
-                } while (string.IsNullOrEmpty(Editora) || Editora.Length > 100);
+                } while (string.IsNullOrEmpty(livro.getEditora()) || livro.getEditora().Length > 100);
 
-                int? Quantidade = null;
+                int Quantidade = 0;
                 do
                 {
                     Console.WriteLine("*Digite a quantidade do livro (somente números): ");
@@ -164,22 +162,16 @@ namespace Aula01 {
                     }
                     else if (inputNumber > 1000)
                     {
-                        Console.WriteLine("A Quantidade deve ter no máximo 1000 caracteres");
+                        Console.WriteLine("A Quantidade deve ser no máximo 1000.");
                     }
                     else
                     {
+                        livro.setQuantidade(inputNumber);
                         Quantidade = inputNumber;
                     }
-                } while (!Quantidade.HasValue);
+                } while (Quantidade == 0);
 
-                var cmd = new MySqlCommand();
-                cmd.Connection = crud;
-
-                cmd.CommandText = "INSERT INTO Livro(Titulo, Autor, Ano, Genero, Editora, Quantidade) " +
-
-                                $"VALUES('{Titulo}', '{Autor}', {Ano}, '{Genero}', '{Editora}', {Quantidade})";
-
-                cmd.ExecuteNonQuery();
+                DAO.InserirLivroDAO(livro.getTitulo(), livro.getAutor(), livro.getAno(), livro.getGenero(), livro.getEditora(), livro.getQuantidade());
 
                 Console.WriteLine("Inserção concluída com sucesso.");
             }
@@ -189,269 +181,253 @@ namespace Aula01 {
             }
         }
 
-        static Boolean ListarLivros()
+        public void ListarLivros()
+    {
+        try
         {
-            try
+            Console.Clear();
+
+            List<Livro> livros = DAO.ListarLivroDAO();
+
+            if (livros.Count > 0)
             {
-                Console.Clear();
-                Console.WriteLine("*Listar livros \n\n ");
-
-                using var crud = new MySqlConnection(cs);
-                crud.Open();
-
-                var cmd = new MySqlCommand("SELECT * FROM Livro", crud);
-                using var reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
+                Console.WriteLine("Lista de alunos:");
+                foreach (Livro livro in livros)
                 {
-                    Console.WriteLine("Lista de Livros:");
-                    while (reader.Read())
-                    {
-                        int ID = reader.GetInt32("ID");
-                        string Titulo = reader.GetString("Titulo");
-                        string Autor = reader.GetString("Autor");
-
-                        int Ano = reader.GetInt32("Ano");
-                        string Genero = reader.GetString("Genero");
-                        string Editora = reader.GetString("Editora");
-                        int Quantidade = reader.GetInt32("Quantidade");
-
-                        Console.WriteLine($"ID: {ID}, Nome: {Titulo}, Autor: {Autor}, Ano: {Ano}, Genero: {Genero}, Editora: {Editora}, Quantidade: {Quantidade}");
-                    }
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("Nenhum Livro cadastrado.");
-                    return false;
+                    // Exibir as informações de cada aluno
+                    Console.WriteLine($"Titulo: {livro.getTitulo()}, Autor: {livro.getAutor()}, Ano: {livro.getAno()}, Genero: {livro.getGenero()}, Editora: {livro.getGenero()}, Editora: {livro.getEditora()}, Quantidade: {livro.getQuantidade()}");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Erro: {ex.Message}");
-                return false;
+                Console.WriteLine("Nenhum livro cadastrado.");
             }
         }
-
-
-        static void AtualizarLivro()
+        catch (Exception ex)
         {
-            try
-            {
-                Console.Clear();
-                bool retorno = ListarLivros();
-
-                if(retorno)
-                {
-                    long? ID = null;
-                    do
-                    {
-                        Console.WriteLine("\n\n*Atualizar livros \n\n ");
-
-                        Console.WriteLine("*Digite o RGM do aluno que deseja atualizar: ");
-                        string input = Console.ReadLine();
-
-                        if (string.IsNullOrEmpty(input))
-                        {
-                            Console.WriteLine("O campo ID não pode estar vazio.");
-                        }
-                        else if (!long.TryParse(input, out long value))
-                        {
-                            Console.WriteLine("Valor de ID inválido.");
-                        }
-                        else
-                        {
-                            ID = value;
-                        }
-                    } while (!ID.HasValue);
-
-                    using var crud = new MySqlConnection(cs);
-                    crud.Open();
-
-                    var cmd = new MySqlCommand();
-                    cmd.Connection = crud;
-
-                    string Titulo;
-                    do
-                    {
-                        Console.WriteLine("*Digite o nome do Livro: ");
-                        Titulo = Console.ReadLine();
-
-                        if (string.IsNullOrEmpty(Titulo))
-                        {
-                            Console.WriteLine("O campo Livro não pode estar vazio.");
-                        }
-                        else if (Titulo.Length > 50)
-                        {
-                            Console.WriteLine("O campo Livro deve ter no máximo 50 caracteres.");
-                        }
-                    } while (string.IsNullOrEmpty(Titulo) || Titulo.Length > 50);
-
-
-                    string Autor;
-                    do
-                    {
-                        Console.WriteLine("*Digite o nome do Autor: ");
-                        Autor = Console.ReadLine();
-
-                        if (string.IsNullOrEmpty(Titulo))
-                        {
-                            Console.WriteLine("O campo Autor não pode estar vazio.");
-                        }
-                        else if (Autor.Length > 50)
-                        {
-                            Console.WriteLine("O campo Autor deve ter no máximo 50 caracteres.");
-                        }
-                    } while (string.IsNullOrEmpty(Autor) || Autor.Length > 50);
-
-                    int? Ano = null;
-                    do
-                    {
-                        Console.WriteLine("*Digite o ano do livro (somente numeros): ");
-                        string input = Console.ReadLine();
-
-                        if (string.IsNullOrEmpty(input))
-                        {
-                            Console.WriteLine("O campo do ano não pode estar vazio.");
-                        }
-                        else if (input.Length != 4)
-                        {
-                            Console.WriteLine("O ano deve ter 4 caracteres");
-                        }
-                        else if (!int.TryParse(input, out int value))
-                        {
-                            Console.WriteLine("Valor de rg inválido.");
-                        }
-                        else
-                        {
-                            Ano = value;
-                        }
-                    } while (!Ano.HasValue);
-
-                    string Genero;
-                    do
-                    {
-                        Console.WriteLine("*Digite o Genero do livro: ");
-                        Genero = Console.ReadLine();
-
-                        if (string.IsNullOrEmpty(Genero))
-                        {
-                            Console.WriteLine("O campo Genero não pode estar vazio.");
-                        }
-                        else if (Genero.Length > 100)
-                        {
-                            Console.WriteLine("O campo Genero deve ter no máximo 100 caracteres.");
-                        }
-                    } while (string.IsNullOrEmpty(Genero) || Genero.Length > 100);
-
-                    string Editora;
-                    do
-                    {
-                        Console.WriteLine("*Digite o Editora do livro: ");
-                        Editora = Console.ReadLine();
-
-                        if (string.IsNullOrEmpty(Editora))
-                        {
-                            Console.WriteLine("O campo Editora não pode estar vazio.");
-                        }
-                        else if (Editora.Length > 100)
-                        {
-                            Console.WriteLine("O campo Editora deve ter no máximo 100 caracteres.");
-                        }
-                    } while (string.IsNullOrEmpty(Editora) || Editora.Length > 100);
-
-                    int? Quantidade = null;
-                    do
-                    {
-                        Console.WriteLine("*Digite a quantidade do livro (somente números): ");
-                        string input = Console.ReadLine();
-
-                        if (string.IsNullOrEmpty(input))
-                        {
-                            Console.WriteLine("O campo de Quantidade não pode estar vazio.");
-                        }
-                        else if (!int.TryParse(input, out int inputNumber) || inputNumber <= 0)
-                        {
-                            Console.WriteLine("A Quantidade deve ser um número inteiro maior que zero.");
-                        }
-                        else if (inputNumber > 1000)
-                        {
-                            Console.WriteLine("A Quantidade deve ter no máximo 1000 caracteres");
-                        }
-                        else
-                        {
-                            Quantidade = inputNumber;
-                        }
-                    } while (!Quantidade.HasValue);
-
-                    cmd.CommandText = $"UPDATE Livro SET Titulo = '{Titulo}', Autor = '{Autor}', Ano = {Ano}, Genero = '{Genero}', Editora = '{Editora}', Quantidade = {Quantidade} WHERE ID = {ID}";
-
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        Console.WriteLine("Livro atualizado com sucesso!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Livro não encontrado.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("\nNão há livros para atualizar !\n\nAperte ENTER para voltar");
-                    Console.ReadLine();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erro: {ex.Message}");
-            }
+            Console.WriteLine($"Erro: {ex.Message}"); 
         }
+    }
 
 
-        static void DeletarLivros()
-        {
-            try
-            {
-                Console.Clear();
-                Boolean retorno = ListarLivros();
-                if (retorno)
-                {
+        // static void AtualizarLivro()
+        // {
+        //     try
+        //     {
+        //         Console.Clear();
+        //         bool retorno = ListarLivros();
 
-                    Console.WriteLine("\n\nDeletar Livro \n\n");
-                    Console.WriteLine("Digite o ID do aluno que deseja deletar: ");
-                    long ID = long.Parse(Console.ReadLine());
+        //         if(retorno)
+        //         {
+        //             long? ID = null;
+        //             do
+        //             {
+        //                 Console.WriteLine("\n\n*Atualizar livros \n\n ");
 
-                    using var crud = new MySqlConnection(cs);
-                    crud.Open();
+        //                 Console.WriteLine("*Digite o RGM do aluno que deseja atualizar: ");
+        //                 string input = Console.ReadLine();
 
-                    var cmd = new MySqlCommand();
-                    cmd.Connection = crud;
+        //                 if (string.IsNullOrEmpty(input))
+        //                 {
+        //                     Console.WriteLine("O campo ID não pode estar vazio.");
+        //                 }
+        //                 else if (!long.TryParse(input, out long value))
+        //                 {
+        //                     Console.WriteLine("Valor de ID inválido.");
+        //                 }
+        //                 else
+        //                 {
+        //                     ID = value;
+        //                 }
+        //             } while (!ID.HasValue);
 
-                    cmd.CommandText = $"DELETE FROM Livro WHERE ID = {ID}";
+        //             using var crud = new MySqlConnection(cs);
+        //             crud.Open();
 
-                    int rowsAffected = cmd.ExecuteNonQuery();
+        //             var cmd = new MySqlCommand();
+        //             cmd.Connection = crud;
 
-                    if (rowsAffected > 0)
-                    {
-                        Console.WriteLine("Livro deletado com sucesso!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("livro não encontrado.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("\nNão há livros para deletar !\n\nAperte ENTER para voltar");
-                    Console.ReadLine();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erro: {ex.Message}");
-            }
-        }
+        //             string Titulo;
+        //             do
+        //             {
+        //                 Console.WriteLine("*Digite o nome do Livro: ");
+        //                 Titulo = Console.ReadLine();
+
+        //                 if (string.IsNullOrEmpty(Titulo))
+        //                 {
+        //                     Console.WriteLine("O campo Livro não pode estar vazio.");
+        //                 }
+        //                 else if (Titulo.Length > 50)
+        //                 {
+        //                     Console.WriteLine("O campo Livro deve ter no máximo 50 caracteres.");
+        //                 }
+        //             } while (string.IsNullOrEmpty(Titulo) || Titulo.Length > 50);
+
+
+        //             string Autor;
+        //             do
+        //             {
+        //                 Console.WriteLine("*Digite o nome do Autor: ");
+        //                 Autor = Console.ReadLine();
+
+        //                 if (string.IsNullOrEmpty(Titulo))
+        //                 {
+        //                     Console.WriteLine("O campo Autor não pode estar vazio.");
+        //                 }
+        //                 else if (Autor.Length > 50)
+        //                 {
+        //                     Console.WriteLine("O campo Autor deve ter no máximo 50 caracteres.");
+        //                 }
+        //             } while (string.IsNullOrEmpty(Autor) || Autor.Length > 50);
+
+        //             int? Ano = null;
+        //             do
+        //             {
+        //                 Console.WriteLine("*Digite o ano do livro (somente numeros): ");
+        //                 string input = Console.ReadLine();
+
+        //                 if (string.IsNullOrEmpty(input))
+        //                 {
+        //                     Console.WriteLine("O campo do ano não pode estar vazio.");
+        //                 }
+        //                 else if (input.Length != 4)
+        //                 {
+        //                     Console.WriteLine("O ano deve ter 4 caracteres");
+        //                 }
+        //                 else if (!int.TryParse(input, out int value))
+        //                 {
+        //                     Console.WriteLine("Valor de rg inválido.");
+        //                 }
+        //                 else
+        //                 {
+        //                     Ano = value;
+        //                 }
+        //             } while (!Ano.HasValue);
+
+        //             string Genero;
+        //             do
+        //             {
+        //                 Console.WriteLine("*Digite o Genero do livro: ");
+        //                 Genero = Console.ReadLine();
+
+        //                 if (string.IsNullOrEmpty(Genero))
+        //                 {
+        //                     Console.WriteLine("O campo Genero não pode estar vazio.");
+        //                 }
+        //                 else if (Genero.Length > 100)
+        //                 {
+        //                     Console.WriteLine("O campo Genero deve ter no máximo 100 caracteres.");
+        //                 }
+        //             } while (string.IsNullOrEmpty(Genero) || Genero.Length > 100);
+
+        //             string Editora;
+        //             do
+        //             {
+        //                 Console.WriteLine("*Digite o Editora do livro: ");
+        //                 Editora = Console.ReadLine();
+
+        //                 if (string.IsNullOrEmpty(Editora))
+        //                 {
+        //                     Console.WriteLine("O campo Editora não pode estar vazio.");
+        //                 }
+        //                 else if (Editora.Length > 100)
+        //                 {
+        //                     Console.WriteLine("O campo Editora deve ter no máximo 100 caracteres.");
+        //                 }
+        //             } while (string.IsNullOrEmpty(Editora) || Editora.Length > 100);
+
+        //             int? Quantidade = null;
+        //             do
+        //             {
+        //                 Console.WriteLine("*Digite a quantidade do livro (somente números): ");
+        //                 string input = Console.ReadLine();
+
+        //                 if (string.IsNullOrEmpty(input))
+        //                 {
+        //                     Console.WriteLine("O campo de Quantidade não pode estar vazio.");
+        //                 }
+        //                 else if (!int.TryParse(input, out int inputNumber) || inputNumber <= 0)
+        //                 {
+        //                     Console.WriteLine("A Quantidade deve ser um número inteiro maior que zero.");
+        //                 }
+        //                 else if (inputNumber > 1000)
+        //                 {
+        //                     Console.WriteLine("A Quantidade deve ter no máximo 1000 caracteres");
+        //                 }
+        //                 else
+        //                 {
+        //                     Quantidade = inputNumber;
+        //                 }
+        //             } while (!Quantidade.HasValue);
+
+        //             cmd.CommandText = $"UPDATE Livro SET Titulo = '{Titulo}', Autor = '{Autor}', Ano = {Ano}, Genero = '{Genero}', Editora = '{Editora}', Quantidade = {Quantidade} WHERE ID = {ID}";
+
+        //             int rowsAffected = cmd.ExecuteNonQuery();
+
+        //             if (rowsAffected > 0)
+        //             {
+        //                 Console.WriteLine("Livro atualizado com sucesso!");
+        //             }
+        //             else
+        //             {
+        //                 Console.WriteLine("Livro não encontrado.");
+        //             }
+        //         }
+        //         else
+        //         {
+        //             Console.WriteLine("\nNão há livros para atualizar !\n\nAperte ENTER para voltar");
+        //             Console.ReadLine();
+        //         }
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         Console.WriteLine($"Erro: {ex.Message}");
+        //     }
+        // }
+
+
+        // static void DeletarLivros()
+        // {
+        //     try
+        //     {
+        //         Console.Clear();
+        //         Boolean retorno = ListarLivros();
+        //         if (retorno)
+        //         {
+
+        //             Console.WriteLine("\n\nDeletar Livro \n\n");
+        //             Console.WriteLine("Digite o ID do aluno que deseja deletar: ");
+        //             long ID = long.Parse(Console.ReadLine());
+
+        //             using var crud = new MySqlConnection(cs);
+        //             crud.Open();
+
+        //             var cmd = new MySqlCommand();
+        //             cmd.Connection = crud;
+
+        //             cmd.CommandText = $"DELETE FROM Livro WHERE ID = {ID}";
+
+        //             int rowsAffected = cmd.ExecuteNonQuery();
+
+        //             if (rowsAffected > 0)
+        //             {
+        //                 Console.WriteLine("Livro deletado com sucesso!");
+        //             }
+        //             else
+        //             {
+        //                 Console.WriteLine("livro não encontrado.");
+        //             }
+        //         }
+        //         else
+        //         {
+        //             Console.WriteLine("\nNão há livros para deletar !\n\nAperte ENTER para voltar");
+        //             Console.ReadLine();
+        //         }
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         Console.WriteLine($"Erro: {ex.Message}");
+        //     }
+        // }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 
-namespace Aula01 { 
+namespace Aula01 {
 class AlunoMenu
 {
     public void Menu()
@@ -29,9 +30,9 @@ class AlunoMenu
                 case 1:
                     InserirAluno();
                     break;
-                // case 2:
-                //     ListarAlunos();
-                //     break;
+                 case 2:
+                     ListarAlunos();
+                     break;
                 // case 3:
                 //     AtualizarAluno();
                 //     break;
@@ -183,49 +184,35 @@ class AlunoMenu
         }
     }
 
-    // static Boolean ListarAlunos()
-    // {
-    //     try
-    //     {
-    //         Console.Clear();
+    public void ListarAlunos()
+    {
+        try
+        {
+            Console.Clear();
 
-           
-    //         var cmd = new MySqlCommand("SELECT * FROM Aluno", crud);
-    //         using var reader = cmd.ExecuteReader();
+            List<Aluno> alunos = DAO.ListarAlunoDAO();
 
-    //         if (reader.HasRows)
-    //         {
-    //             Console.WriteLine("Lista de alunos:");
-    //             while (reader.Read())
-    //             {
-    //                 string nome = reader.GetString("Nome");
-    //                 long rgm = reader.GetInt64("Rgm");
+            if (alunos.Count > 0)
+            {
+                Console.WriteLine("Lista de alunos:");
+                foreach (Aluno aluno in alunos)
+                {
+                    // Exibir as informações de cada aluno
+                    Console.WriteLine($"Nome: {aluno.getNome()}, RGM: {aluno.getRGM()}, Data de Nascimento: {aluno.getDataNas()}, Curso: {aluno.getCurso()}, Bolsista: {aluno.getBolsista()}, RG: {aluno.getRG()}, Gênero: {aluno.getGenero()}");
                     
-    //                 DateTime dataNasc = reader.GetDateTime("DataNasc");
-    //                 string curso = reader.GetString("Curso");
-    //                 bool bolsista = reader.GetBoolean("Bolsista");
-    //                 long rg = reader.GetInt64("RG");
-    //                 string genero = reader.GetString("Genero");
-
-    //                 Console.WriteLine($"Nome: {nome}, RGM: {rgm}, Data de Nascimento: {dataNasc}, Curso: {curso}, Bolsista: {bolsista}, RG: {rg}, Gênero: {genero}");
-    //                 Console.WriteLine("Aperte ENTER para seguir");
-    //                 Console.ReadLine();   
-    //             }
-    //                 return true;
-    //             }
-    //         else
-    //         {
-    //             Console.WriteLine("Nenhum aluno cadastrado.");
-    //                 return false;
-    //         }
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         Console.WriteLine($"Erro: {ex.Message}");
-    //         return false;
-    //         }
-    // }
-
+                }
+                
+            }
+            else
+            {
+                Console.WriteLine("Nenhum aluno cadastrado.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro: {ex.Message}"); 
+        }
+    }
 
     // static void AtualizarAluno()
     // {

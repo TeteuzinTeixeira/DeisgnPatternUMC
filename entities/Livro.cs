@@ -24,15 +24,15 @@ namespace Aula01 {
             this.id = id;
         }
 
-        public long getIBSM()
-        {
-            return ibsm;
-        }
+        // public long getIBSM()
+        // {
+        //     return ibsm;
+        // }
 
-        public void setIBSM(long ibsm)
-        {
-            this.ibsm = ibsm;
-        }
+        // public void setIBSM(long ibsm)
+        // {
+        //     this.ibsm = ibsm;
+        // }
 
         public string getTitulo()
         {

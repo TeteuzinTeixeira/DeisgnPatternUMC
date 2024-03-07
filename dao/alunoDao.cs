@@ -1,5 +1,6 @@
 using MySql.Data.MySqlClient;
 using System;
+using System.Data;
 
 namespace Aula01 {
 
@@ -18,6 +19,18 @@ namespace Aula01 {
 
         }
 
+        public List<Aluno> ListarAlunoDAO(){
+                
+            Conexao conexao = new Conexao();
+        
+            string consulta = "SELECT * FROM Aluno";
+
+            List<Aluno> alunos = conexao.RetornarAlunos(consulta);
+
+            return alunos;
+            }
+        }
+
     }
 
-}
+
