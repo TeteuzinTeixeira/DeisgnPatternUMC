@@ -4,11 +4,10 @@ using System.Globalization;
 
 namespace Aula01 {
 
-    class Livro
+    class LivroMenu
     {
-        static string cs = @"server=sql.freedb.tech;userid=freedb_Mateus;password=Nt8pd!Qz#UktKES;database=freedb_Design-Pattern";
 
-        public void LivroMenu()
+        public void Menu()
         {
             while (true)
             {

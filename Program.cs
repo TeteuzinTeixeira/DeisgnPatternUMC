@@ -6,8 +6,8 @@ class Program
     static void Main(string[] args)
     {
         int opcao = 0;
-        Aluno aluno = new Aluno();
-        Livro livro = new Livro();
+        AlunoMenu aluno = new AlunoMenu();
+        // LivroMenu livro = new LivroMenu();
         do
         {
             Console.Clear();
@@ -23,11 +23,11 @@ class Program
             switch (opcao)
             {
                 case 1:
-                    aluno.AlunoMenu(); 
+                    aluno.Menu(); 
                     break;
-                case 2:
-                    livro.LivroMenu();
-                    break;
+                // case 2:
+                //     livro.LivroMenu();
+                //     break;
                 case 0:
                     Console.WriteLine("Feito por: \nMATEUS TEIXEIRA GOMES e IAGO DA SILVA LIMA");
                     return;
