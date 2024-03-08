@@ -13,7 +13,8 @@ namespace Aula01 {
         
             string consulta = $"INSERT INTO Livro(Titulo, Autor, Ano, Genero, Editora, Quantidade) " +
                                 $"VALUES('{titulo}', '{autor}', {ano}, '{genero}', '{editora}', {quantidade})";
-            conexao.ExecutarConsulta(consulta);
+            MySqlCommand comando = new MySqlCommand(consulta);
+            conexao.ExecutarConsulta(comando);
         }
 
         public List<Livro> ListarLivroDAO(){
