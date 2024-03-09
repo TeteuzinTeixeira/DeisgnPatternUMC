@@ -54,6 +54,27 @@ namespace Aula01 {
         {
             try
             {
+                long Isbn = 0;
+                do
+                {
+                    Console.WriteLine("*Digite o ISBN do livro (somente números): ");
+                    string input = Console.ReadLine();
+
+                    if (string.IsNullOrEmpty(input))
+                    {
+                        Console.WriteLine("O campo do ISBN não pode estar vazio.");
+                    }
+                    else if (!long.TryParse(input, out long value))
+                    {
+                        Console.WriteLine("Valor de ISBN inválido.");
+                    }
+                    else
+                    {
+                        livro.setISBN(value);
+                        Isbn = value;
+                    }
+                } while (Isbn == 0);
+
                 string Titulo;
                 do
                 {
@@ -130,20 +151,26 @@ namespace Aula01 {
                     }
                 } while (string.IsNullOrEmpty(livro.getGenero()) || livro.getGenero().Length > 100);
 
+                int Edicao = 0;
                 do
                 {
-                    Console.WriteLine("*Digite o Editora do livro: ");
-                    livro.setEditora(Console.ReadLine());
+                    Console.WriteLine("*Digite a Edicao do livro (somente números): ");
+                    string input = Console.ReadLine();
 
-                    if (string.IsNullOrEmpty(livro.getEditora()))
+                    if (string.IsNullOrEmpty(input))
                     {
-                        Console.WriteLine("O campo Editora não pode estar vazio.");
+                        Console.WriteLine("O campo do ano não pode estar vazio.");
                     }
-                    else if (livro.getEditora().Length > 100)
+                    else if (!int.TryParse(input, out int value))
                     {
-                        Console.WriteLine("O campo Editora deve ter no máximo 100 caracteres.");
+                        Console.WriteLine("Valor de ano inválido.");
                     }
-                } while (string.IsNullOrEmpty(livro.getEditora()) || livro.getEditora().Length > 100);
+                    else
+                    {
+                        livro.setEdicao(value);
+                        Edicao = value;
+                    }
+                } while (Edicao == 0);
 
                 int Quantidade = 0;
                 do
@@ -170,7 +197,7 @@ namespace Aula01 {
                     }
                 } while (Quantidade == 0);
 
-                DAO.InserirLivroDAO(livro.getTitulo(), livro.getAutor(), livro.getAno(), livro.getGenero(), livro.getEditora(), livro.getQuantidade());
+                DAO.InserirLivroDAO(livro.getISBN(), livro.getTitulo(), livro.getAutor(), livro.getAno(), livro.getGenero(), livro.getEdicao(), livro.getQuantidade());
 
                 Console.WriteLine("Inserção concluída com sucesso.");
             }
@@ -194,7 +221,7 @@ namespace Aula01 {
                     foreach (Livro livro in livros)
                     {
                         // Exibir as informações de cada aluno
-                        Console.WriteLine($"Titulo: {livro.getTitulo()}, Autor: {livro.getAutor()}, Ano: {livro.getAno()}, Genero: {livro.getGenero()}, Editora: {livro.getGenero()}, Editora: {livro.getEditora()}, Quantidade: {livro.getQuantidade()}");
+                        Console.WriteLine($"ISBN: {livro.getISBN}, Titulo: {livro.getTitulo()}, Autor: {livro.getAutor()}, Ano: {livro.getAno()}, Genero: {livro.getGenero()}, Genero: {livro.getGenero()}, Editocao: {livro.getEdicao()}, Quantidade: {livro.getQuantidade()}");
                     }
                 }
                 else

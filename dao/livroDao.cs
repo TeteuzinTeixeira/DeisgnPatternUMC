@@ -5,13 +5,25 @@ namespace Aula01 {
 
     class LivroDAO
     {
-        public void InserirLivroDAO(string titulo, string autor, int ano, string genero, string editora, int quantidade)
+        internal void InserirLivroDAO(long isbn, string titulo, string autor, int ano, string genero, int edicao, int quantidade)
         {
-            Conexao conexao = new Conexao();
-            string consulta = $"INSERT INTO Livro(Titulo, Autor, Ano, Genero, Editora, Quantidade) " +
-                                $"VALUES('{titulo}', '{autor}', {ano}, '{genero}', '{editora}', {quantidade})";
-            MySqlCommand comando = new MySqlCommand(consulta);
-            conexao.ExecutarConsulta(comando);
+            try
+            {
+                Conexao conexao = new Conexao();
+                string consulta = $"INSERT INTO Livro(ISBN, Titulo, Autor, Ano, Genero, Edicao, Quantidade) " +
+                                    $"VALUES({isbn}, '{titulo}', '{autor}', {ano}, '{genero}', {edicao}, {quantidade})";
+                using (MySqlConnection conexaoMySQL = Conexao.CreateDataBaseConnection())
+                {
+                    conexaoMySQL.Open(); 
+                    MySqlCommand comando = new MySqlCommand(consulta, conexaoMySQL); 
+                    comando.ExecuteNonQuery();
+                    Console.WriteLine("Inserção de livro realizada com sucesso!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao inserir livro: " + ex.Message);
+            }
         }
 
         public List<Livro> ListarLivroDAO()
@@ -19,7 +31,7 @@ namespace Aula01 {
             List<Livro> livros = new List<Livro>();
             try
             {
-                string consulta = "SELECT Titulo, Autor, Ano, Genero, Editora, Quantidade FROM Livro";
+                string consulta = "SELECT ISBN, Titulo, Autor, Ano, Genero, Edicao, Quantidade FROM Livro";
                 using (MySqlConnection conexaoMySQL = Conexao.CreateDataBaseConnection())
                 {
                     conexaoMySQL.Open(); 
@@ -28,11 +40,12 @@ namespace Aula01 {
                     while (reader.Read())
                     {
                         Livro livro = new Livro();
+                        livro.setISBN(reader.GetInt64("ISBN"));
                         livro.setTitulo(reader.GetString("Titulo"));
                         livro.setAutor(reader.GetString("Autor"));
                         livro.setAno(reader.GetInt32("Ano"));
                         livro.setGenero(reader.GetString("Genero"));
-                        livro.setEditora(reader.GetString("Editora"));
+                        livro.setEdicao(reader.GetInt32("Edicao"));
                         livro.setQuantidade(reader.GetInt32("Quantidade"));
                         livros.Add(livro);
                     }
@@ -47,14 +60,14 @@ namespace Aula01 {
             return livros;
         }
 
-        public void DeletarLivro(long ID)
+        public void DeletarLivro(long isbn)
         {
             try
             {
                 Conexao conexao = new Conexao();
-                string consulta = "DELETE FROM Livro WHERE ID = @ID";
+                string consulta = "DELETE FROM Livro WHERE ISBN = @isbn";
                 MySqlCommand comando = new MySqlCommand(consulta);
-                comando.Parameters.AddWithValue("@ID", ID);
+                comando.Parameters.AddWithValue("@isbn", isbn);
                 conexao.ExecutarConsulta(comando);
                 Console.WriteLine("Livro deletado com sucesso!");
             }
@@ -62,6 +75,11 @@ namespace Aula01 {
             {
                 Console.WriteLine($"Erro: {ex.Message}");
             }
+        }
+
+        internal void InserirLivroDAO(long v1, string v2, string v3, int v4, int v5, int v6, int v7)
+        {
+            throw new NotImplementedException();
         }
     }
 }

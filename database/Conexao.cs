@@ -46,11 +46,12 @@ namespace Aula01 {
                     while (reader.Read())
                     {
                         Livro livro = new Livro();
+                        livro.setISBN(reader.GetInt64("ISBN"));
                         livro.setTitulo(reader.GetString("Titulo"));
                         livro.setAutor(reader.GetString("Autor"));
                         livro.setAno(reader.GetInt32("Ano"));
                         livro.setGenero(reader.GetString("Genero"));
-                        livro.setEditora(reader.GetString("Editora"));
+                        livro.setEdicao(reader.GetInt32("Edicao"));
                         livro.setQuantidade(reader.GetInt32("Quantidade"));
                         
                         livros.Add(livro);

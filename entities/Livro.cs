@@ -6,12 +6,12 @@ namespace Aula01 {
     class Livro
     {
         private long id;
-        private long ibsm;
+        private long isbn;
         private string titulo;
         private string autor;
         private int ano;
         private string genero;
-        private string editora;
+        private int edicao;
         private int quantidade;
 
         public long getID()
@@ -24,15 +24,15 @@ namespace Aula01 {
             this.id = id;
         }
 
-        // public long getIBSM()
-        // {
-        //     return ibsm;
-        // }
+        public long getISBN()
+        {
+            return isbn;
+        }
 
-        // public void setIBSM(long ibsm)
-        // {
-        //     this.ibsm = ibsm;
-        // }
+        public void setISBN(long isbn)
+        {
+            this.isbn = isbn;
+        }
 
         public string getTitulo()
         {
@@ -74,14 +74,14 @@ namespace Aula01 {
             this.genero = genero;
         }
 
-        public string getEditora()
+        public int getEdicao()
         {
-            return editora;
+            return edicao;
         }
 
-        public void setEditora(string editora)
+        public void setEdicao(int edicao)
         {
-            this.editora = editora;
+            this.edicao = edicao;
         }
 
         public int getQuantidade()
