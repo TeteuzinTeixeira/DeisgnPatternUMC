@@ -3,7 +3,6 @@ using System;
 using System.Globalization;
 
 namespace Aula01 {
-
     class LivroMenu
     {
         public void Menu()
@@ -36,9 +35,9 @@ namespace Aula01 {
                     // case 3:
                     //     AtualizarLivro();
                     //     break;
-                    // case 4:
-                    //     DeletarLivros();
-                    //     break;
+                    case 4:
+                        DeletarLivro();
+                        break;
                     case 0:
                         return;
                     default:
@@ -182,32 +181,32 @@ namespace Aula01 {
         }
 
         public void ListarLivros()
-    {
-        try
         {
-            Console.Clear();
-
-            List<Livro> livros = DAO.ListarLivroDAO();
-
-            if (livros.Count > 0)
+            try
             {
-                Console.WriteLine("Lista de alunos:");
-                foreach (Livro livro in livros)
+                Console.Clear();
+
+                List<Livro> livros = DAO.ListarLivroDAO();
+
+                if (livros.Count > 0)
                 {
-                    // Exibir as informações de cada aluno
-                    Console.WriteLine($"Titulo: {livro.getTitulo()}, Autor: {livro.getAutor()}, Ano: {livro.getAno()}, Genero: {livro.getGenero()}, Editora: {livro.getGenero()}, Editora: {livro.getEditora()}, Quantidade: {livro.getQuantidade()}");
+                    Console.WriteLine("Lista de livros:");
+                    foreach (Livro livro in livros)
+                    {
+                        // Exibir as informações de cada aluno
+                        Console.WriteLine($"Titulo: {livro.getTitulo()}, Autor: {livro.getAutor()}, Ano: {livro.getAno()}, Genero: {livro.getGenero()}, Editora: {livro.getGenero()}, Editora: {livro.getEditora()}, Quantidade: {livro.getQuantidade()}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Nenhum livro cadastrado.");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("Nenhum livro cadastrado.");
+                Console.WriteLine($"Erro: {ex.Message}"); 
             }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Erro: {ex.Message}"); 
-        }
-    }
 
 
         // static void AtualizarLivro()
@@ -385,49 +384,21 @@ namespace Aula01 {
         //     }
         // }
 
-
-        // static void DeletarLivros()
-        // {
-        //     try
-        //     {
-        //         Console.Clear();
-        //         Boolean retorno = ListarLivros();
-        //         if (retorno)
-        //         {
-
-        //             Console.WriteLine("\n\nDeletar Livro \n\n");
-        //             Console.WriteLine("Digite o ID do aluno que deseja deletar: ");
-        //             long ID = long.Parse(Console.ReadLine());
-
-        //             using var crud = new MySqlConnection(cs);
-        //             crud.Open();
-
-        //             var cmd = new MySqlCommand();
-        //             cmd.Connection = crud;
-
-        //             cmd.CommandText = $"DELETE FROM Livro WHERE ID = {ID}";
-
-        //             int rowsAffected = cmd.ExecuteNonQuery();
-
-        //             if (rowsAffected > 0)
-        //             {
-        //                 Console.WriteLine("Livro deletado com sucesso!");
-        //             }
-        //             else
-        //             {
-        //                 Console.WriteLine("livro não encontrado.");
-        //             }
-        //         }
-        //         else
-        //         {
-        //             Console.WriteLine("\nNão há livros para deletar !\n\nAperte ENTER para voltar");
-        //             Console.ReadLine();
-        //         }
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         Console.WriteLine($"Erro: {ex.Message}");
-        //     }
-        // }
+        public void DeletarLivro()
+        {
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("\n\nDeletar Livro \n\n ");
+                Console.WriteLine("Digite o ID do livro que deseja deletar: ");
+                long ID = long.Parse(Console.ReadLine());
+                livro.setID(ID);
+                DAO.DeletarLivro(livro.getID());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro: {ex.Message}");
+            }
+        }
     }
 }
