@@ -17,7 +17,6 @@ namespace Aula01 {
                     conexaoMySQL.Open(); 
                     MySqlCommand comando = new MySqlCommand(consulta, conexaoMySQL); 
                     comando.ExecuteNonQuery();
-                    Console.WriteLine("Inserção de livro realizada com sucesso!");
                 }
             }
             catch (Exception ex)
@@ -58,6 +57,45 @@ namespace Aula01 {
             }
             return livros;
         }
+        
+        public void UpdateLivro(long isbn, string titulo, string autor, int ano, string genero, int edicao, int quantidade){
+
+            try
+            {
+                Conexao conexao = new Conexao();
+                string consulta = "UPDATE Livro SET Titulo = @Titulo, Autor = @Autor, Ano = @Ano, Genero = @Genero, Edicao = @Edicao, quantidade = @Quantidade WHERE ISBN = @isbn";
+                using (MySqlConnection conexaoMySQL = Conexao.CreateDataBaseConnection())
+                {
+                    conexaoMySQL.Open();
+                    MySqlCommand comando = new MySqlCommand(consulta, conexaoMySQL);
+
+                    Livro livro = new Livro();
+                    comando.Parameters.AddWithValue("@Titulo", titulo);
+                    comando.Parameters.AddWithValue("@Autor", autor);
+                    comando.Parameters.AddWithValue("@Ano", ano);
+                    comando.Parameters.AddWithValue("@Genero", genero);
+                    comando.Parameters.AddWithValue("@Edicao", edicao);
+                    comando.Parameters.AddWithValue("@Quantidade", quantidade);
+                    comando.Parameters.AddWithValue("@isbn", isbn);
+
+                    int linhasAfetadas = comando.ExecuteNonQuery();
+
+                    if (linhasAfetadas > 0)
+                    {
+                        Console.WriteLine("Livro atualizado com sucesso!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Livro nao encontrado!");
+                    }
+                }
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 
         public void DeletarLivro(long isbn)
         {
@@ -76,6 +114,5 @@ namespace Aula01 {
                 Console.WriteLine($"Erro: {ex.Message}");
             }
         }
-
     }
 }

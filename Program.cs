@@ -29,7 +29,7 @@ class Program
                     livro.Menu();
                     break;
                 case 0:
-                    Console.WriteLine("Feito por: \nMATEUS TEIXEIRA GOMES e IAGO DA SILVA LIMA");
+                    Console.WriteLine("\nFeito por: Mateus Teixeira e Iago Da Silva Lima");
                     return;
                 
             }

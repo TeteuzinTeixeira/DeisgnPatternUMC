@@ -74,11 +74,13 @@ namespace Aula01
 
                     if (linhasAfetadas > 0)
                     {
-                        Console.WriteLine("Usuario atualizado com sucesso!");
+                        Console.WriteLine("Usuario atualizado com sucesso!\n");
+                        Console.WriteLine("Pressione Enter para continuar");
                     }
                     else
                     {
                         Console.WriteLine("Usuario nao encontrado!");
+                        Console.WriteLine("Pressione Enter para continuar");
                     }
                 }
 

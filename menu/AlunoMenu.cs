@@ -177,6 +177,7 @@ namespace Aula01 {
                 DAO.InserirAlunoDAO(aluno.getNome(), aluno.getRGM(), aluno.getDataNas(), aluno.getCurso(), aluno.getBolsista(), aluno.getRG(), aluno.getGenero());
 
                 Console.WriteLine("Inserção concluída com sucesso.");
+                Console.WriteLine("\nPresione Enter para continuar\n");
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -190,24 +191,23 @@ namespace Aula01 {
             try
             {
                 Console.Clear();
-
                 List<Aluno> alunos = DAO.ListarAlunoDAO();
-
                 if (alunos.Count > 0)
                 {
                     Console.WriteLine("Consulta executada com sucesso!\n");
                     Console.WriteLine("Lista de alunos:");
                     foreach (Aluno aluno in alunos)
                     {
-                        // Exibir as informações de cada aluno
                         Console.WriteLine($"Nome: {aluno.getNome()}, RGM: {aluno.getRGM()}, Data de Nascimento: {aluno.getDataNas()}, Curso: {aluno.getCurso()}, Bolsista: {aluno.getBolsista()}, RG: {aluno.getRG()}, Gênero: {aluno.getGenero()}");      
                     }
+                    Console.WriteLine("\nPresione Enter para continuar");
                     Console.ReadLine();
                     return true;
                 }
                 else
                 {
                     Console.WriteLine("Nenhum aluno cadastrado.");
+                    Console.WriteLine("\nPresione Enter para continuar");
                     Console.ReadLine();
                     return false;
                 }
@@ -230,7 +230,7 @@ namespace Aula01 {
                     do
                     {
 
-                        Console.WriteLine("*Atualizar dados do aluno:\n\n");
+                        Console.WriteLine("*Atualizar dados do aluno:\n");
                         Console.WriteLine("*Digite o RGM do aluno  (11 digitos): ");
                         string input = Console.ReadLine();
 
@@ -364,7 +364,7 @@ namespace Aula01 {
             {
                 try
                 {
-                    Console.WriteLine("\n\nDeletar Aluno \n\n ");
+                    Console.WriteLine("Deletar Aluno\n");
                     Console.WriteLine("Digite o RGM do aluno que deseja deletar: ");
                     long rgm = long.Parse(Console.ReadLine());
                     aluno.setRGM(rgm);
