@@ -163,7 +163,7 @@ namespace Aula01 {
                     }
                     else if (!int.TryParse(input, out int value))
                     {
-                        Console.WriteLine("Valor de ano inválido.");
+                        Console.WriteLine("Edição inválido.");
                     }
                     else
                     {
@@ -200,6 +200,7 @@ namespace Aula01 {
                 DAO.InserirLivroDAO(livro.getISBN(), livro.getTitulo(), livro.getAutor(), livro.getAno(), livro.getGenero(), livro.getEdicao(), livro.getQuantidade());
 
                 Console.WriteLine("Inserção concluída com sucesso.");
+                Console.ReadLine();
             }
             catch (Exception ex)
             {
@@ -207,7 +208,8 @@ namespace Aula01 {
             }
         }
 
-        public void ListarLivros()
+        
+        public Boolean ListarLivros()
         {
             try
             {
@@ -217,21 +219,28 @@ namespace Aula01 {
 
                 if (livros.Count > 0)
                 {
+                    Console.WriteLine("Consulta executada com sucesso!\n");
                     Console.WriteLine("Lista de livros:");
+                    
                     foreach (Livro livro in livros)
                     {
-                        // Exibir as informações de cada aluno
-                        Console.WriteLine($"ISBN: {livro.getISBN}, Titulo: {livro.getTitulo()}, Autor: {livro.getAutor()}, Ano: {livro.getAno()}, Genero: {livro.getGenero()}, Genero: {livro.getGenero()}, Editocao: {livro.getEdicao()}, Quantidade: {livro.getQuantidade()}");
+                        // Exibir as informações de cada livro
+                        Console.WriteLine($"ISBN: {livro.getISBN()}, Titulo: {livro.getTitulo()}, Autor: {livro.getAutor()}, Ano: {livro.getAno()}, Genero: {livro.getGenero()}, Genero: {livro.getGenero()}, Editocao: {livro.getEdicao()}, Quantidade: {livro.getQuantidade()}");
                     }
+                    Console.ReadLine();
+                    return true;
                 }
                 else
                 {
                     Console.WriteLine("Nenhum livro cadastrado.");
+                    Console.ReadLine();
+                    return false;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erro: {ex.Message}"); 
+                Console.WriteLine($"Erro: {ex.Message}");
+                return false;
             }
         }
 
@@ -413,19 +422,26 @@ namespace Aula01 {
 
         public void DeletarLivro()
         {
-            try
+            Console.Clear();
+
+            if (ListarLivros())
             {
-                Console.Clear();
-                Console.WriteLine("\n\nDeletar Livro \n\n ");
-                Console.WriteLine("Digite o ID do livro que deseja deletar: ");
-                long ID = long.Parse(Console.ReadLine());
-                livro.setID(ID);
-                DAO.DeletarLivro(livro.getID());
+                try
+                {
+                    
+                    Console.WriteLine("\n\nDeletar Livro \n\n ");
+                    Console.WriteLine("Digite o ISBN do livro que deseja deletar: ");
+                    long ISBN = long.Parse(Console.ReadLine());
+                    livro.setISBN(ISBN);
+                    DAO.DeletarLivro(livro.getISBN());
+                    
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro: {ex.Message}");
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erro: {ex.Message}");
-            }
+           
         }
     }
 }

@@ -21,7 +21,6 @@ namespace Aula01 {
                     conexao.Open();
                     comando.Connection = conexao;
                     comando.ExecuteNonQuery();
-                    Console.WriteLine("Consulta executada com sucesso!");
                 }
                 catch (Exception ex)
                 {

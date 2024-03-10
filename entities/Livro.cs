@@ -14,15 +14,6 @@ namespace Aula01 {
         private int edicao;
         private int quantidade;
 
-        public long getID()
-        {
-            return id;
-        }
-
-        public void setID(long id)
-        {
-            this.id = id;
-        }
 
         public long getISBN()
         {

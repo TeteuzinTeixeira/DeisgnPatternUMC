@@ -31,7 +31,7 @@ namespace Aula01 {
             List<Livro> livros = new List<Livro>();
             try
             {
-                string consulta = "SELECT ISBN, Titulo, Autor, Ano, Genero, Edicao, Quantidade FROM Livro";
+                string consulta = "SELECT * FROM Livro";
                 using (MySqlConnection conexaoMySQL = Conexao.CreateDataBaseConnection())
                 {
                     conexaoMySQL.Open(); 
@@ -49,8 +49,7 @@ namespace Aula01 {
                         livro.setQuantidade(reader.GetInt32("Quantidade"));
                         livros.Add(livro);
                     }
-                    reader.Close();
-                    Console.WriteLine("Consulta executada com sucesso!");
+                    reader.Close();  
                 } 
             }
             catch (Exception ex)
@@ -70,6 +69,7 @@ namespace Aula01 {
                 comando.Parameters.AddWithValue("@isbn", isbn);
                 conexao.ExecutarConsulta(comando);
                 Console.WriteLine("Livro deletado com sucesso!");
+                Console.ReadLine();
             }
             catch (Exception ex)
             {
@@ -77,9 +77,5 @@ namespace Aula01 {
             }
         }
 
-        internal void InserirLivroDAO(long v1, string v2, string v3, int v4, int v5, int v6, int v7)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

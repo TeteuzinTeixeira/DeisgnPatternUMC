@@ -41,7 +41,6 @@ namespace Aula01
                         alunos.Add(aluno);
                     }
                     reader.Close();
-                    Console.WriteLine("Consulta executada com sucesso!");
                 } 
             }
             catch (Exception ex)
@@ -51,7 +50,45 @@ namespace Aula01
             return alunos;
         }
 
-        public void UpdateAluno(){
+        public void UpdateAluno(long rgm, string nome, DateTime dataNasc, string curso, string bolsista, long rg, string genero){
+
+            try
+            {
+                Conexao conexao = new Conexao();
+                string consulta = "UPDATE Aluno SET Nome = @Nome, DataNasc = @DataNasc, Curso = @Curso, Bolsista = @Bolsista, RG = @RG, Genero = @Genero WHERE Rgm = @Rgm";
+                using (MySqlConnection conexaoMySQL = Conexao.CreateDataBaseConnection())
+                {
+                    conexaoMySQL.Open();
+                    MySqlCommand comando = new MySqlCommand(consulta, conexaoMySQL);
+
+                    Aluno aluno = new Aluno();
+                    comando.Parameters.AddWithValue("@Nome", nome);
+                    comando.Parameters.AddWithValue("@DataNasc", dataNasc);
+                    comando.Parameters.AddWithValue("@Curso", curso);
+                    comando.Parameters.AddWithValue("@Bolsista", bolsista);
+                    comando.Parameters.AddWithValue("@RG", rg);
+                    comando.Parameters.AddWithValue("@Genero", genero);
+                    comando.Parameters.AddWithValue("@Rgm", rgm);
+
+                    int linhasAfetadas = comando.ExecuteNonQuery();
+
+                    if (linhasAfetadas > 0)
+                    {
+                        Console.WriteLine("Usuario atualizado com sucesso!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Usuario nao encontrado!");
+                    }
+                }
+
+
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             
         }
         public void DeletarAluno(long rgm)
@@ -64,6 +101,7 @@ namespace Aula01
                 comando.Parameters.AddWithValue("@Rgm", rgm);
                 conexao.ExecutarConsulta(comando);
                 Console.WriteLine("Aluno deletado com sucesso!");
+                Console.ReadLine();
             }
             catch (Exception ex)
             {
