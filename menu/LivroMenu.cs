@@ -5,48 +5,6 @@ using System.Globalization;
 namespace Aula01 {
     class LivroMenu
     {
-        public void Menu()
-        {
-            while (true)
-            {
-                Console.Clear();
-
-                Console.WriteLine("\nSelecione uma operação:");
-
-                Console.WriteLine("\n---------- Livro ----------\n");
-
-                Console.WriteLine("1. Inserir Livro");
-                Console.WriteLine("2. Listar livros");
-                Console.WriteLine("3. Atualizar livro ");
-                Console.WriteLine("4. Deletar livro");
-                Console.WriteLine("0. Voltar ao menu\n");
-
-                Console.Write("Opcao: ");
-                int opcao = int.Parse(Console.ReadLine());
-
-                switch (opcao)
-                {
-                    case 1:
-                        InserirLivro();
-                        break;
-                    case 2:
-                        ListarLivros();
-                        break;
-                    case 3:
-                        AtualizarLivro();
-                        break;
-                    case 4:
-                        DeletarLivro();
-                        break;
-                    case 0:
-                        return;
-                    default:
-                        Console.WriteLine("Opção inválida. Por favor, escolha uma opção válida.");
-                        break;
-                }
-            }
-        }
-
         Livro livro = new Livro();
         LivroDAO DAO = new LivroDAO();
 
