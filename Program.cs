@@ -1,43 +1,50 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
+using Aula_01;
 using Aula01;
 
 class Program
 {
     static void Main(string[] args)
     {
-        int opcao = 0;
+        Singleton singleton = Singleton.GetInstance();
+
         AlunoMenu aluno = new AlunoMenu();
         LivroMenu livro = new LivroMenu();
+        int opcao = 0;
+
         do
         {
-            Console.Clear();
+            opcao = singleton.DispalyMenu();
 
-            Console.WriteLine("------------ Sistema de Gerenciamento ------------\n");
-            Console.WriteLine("Escolha a opcao desejada\n");
-            Console.WriteLine("1. Aluno\n");
-            Console.WriteLine("2. Livro\n");
-            Console.WriteLine("0. Sair\n");
-
-            Console.Write("Opcao: ");
-            opcao = int.Parse(Console.ReadLine());
             switch (opcao)
             {
                 case 1:
-                    aluno.Menu(); 
+                    aluno.InserirAluno();   
                     break;
                 case 2:
-                    livro.Menu();
+                    aluno.ListarAlunos();
                     break;
-                case 0:
-                    Console.WriteLine("\nFeito por: Mateus Teixeira e Iago Da Silva Lima");
-                    return;
-                
-            }
+                case 3:
+                    aluno.AtualizarAluno();
+                    break;
+                case 4:
+                    aluno.DeletarAluno();
+                    break;
+                case 5:
+                    livro.InserirLivro();
+                    break;
+                case 6:
+                    livro.ListarLivros();
+                    break;
+                case 7:
+                    livro.AtualizarLivro();
+                    break;
+                case 8:
+                    livro.DeletarLivro();
+                    break;
+            } 
 
-
-
-        } while (opcao != 0);
-            
-
+         } while (opcao != 0);
     }
 }

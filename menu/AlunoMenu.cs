@@ -6,48 +6,6 @@ using System.Security.Cryptography.X509Certificates;
 namespace Aula01 {
     class AlunoMenu
     {
-        public void Menu()
-        {
-            while (true)
-            {
-                Console.Clear();
-
-                Console.WriteLine("\nSelecione uma operação:");
-
-                Console.WriteLine("\n---------- Aluno ----------\n");
-
-                Console.WriteLine("1. Inserir aluno");
-                Console.WriteLine("2. Listar alunos");
-                Console.WriteLine("3. Atualizar aluno");
-                Console.WriteLine("4. Deletar aluno");
-                Console.WriteLine("0. Voltar ao menu\n");
-
-                    Console.Write("Opcao: ");
-                    int opcao = int.Parse(Console.ReadLine());
-
-                switch (opcao)
-                {
-                    case 1:
-                        InserirAluno();
-                        break;
-                    case 2:
-                        ListarAlunos();
-                        break;
-                    case 3:
-                        AtualizarAluno();
-                        break;
-                    case 4:
-                        DeletarAluno();
-                        break;
-                    case 0:
-                        return;
-                    default:
-                        Console.WriteLine("Opção inválida. Por favor, escolha uma opção válida.");
-                        break;
-                }
-            }
-        }
-
         Aluno aluno = new Aluno();
         AlunoDao DAO = new AlunoDao();
 
