@@ -9,42 +9,50 @@ class Program
     {
         Singleton singleton = Singleton.GetInstance();
 
-        AlunoMenu aluno = new AlunoMenu();
-        LivroMenu livro = new LivroMenu();
-        int opcao = 0;
+        Secretaria secretaria = new Secretaria();
+        Biblioteca biblioteca = new Biblioteca();
+        
+        int chave = 0;
+        int opcao;
+        int metodo;
+        
 
         do
         {
-            opcao = singleton.DispalyMenu();
+            opcao = singleton.DisplayMenu(chave);
 
             switch (opcao)
             {
                 case 1:
-                    aluno.InserirAluno();   
+                    chave = 1;
+                    metodo = singleton.DisplayMenu(chave);
+                    if (metodo != 0)
+                    {
+                        secretaria.showMenu(metodo);
+                    }
+                    chave = 0;
                     break;
                 case 2:
-                    aluno.ListarAlunos();
+                    chave = 2;
+                    metodo = singleton.DisplayMenu(chave);
+                    if (metodo != 0)
+                    {
+                        biblioteca.showMenu(metodo);
+                    }
+                    chave = 0;
                     break;
                 case 3:
-                    aluno.AtualizarAluno();
+                    Console.WriteLine("saindo...");
                     break;
-                case 4:
-                    aluno.DeletarAluno();
+                default:
+                    Console.WriteLine("Numero invalido");
+                    Console.ReadLine();
+                    chave = 0;
                     break;
-                case 5:
-                    livro.InserirLivro();
-                    break;
-                case 6:
-                    livro.ListarLivros();
-                    break;
-                case 7:
-                    livro.AtualizarLivro();
-                    break;
-                case 8:
-                    livro.DeletarLivro();
-                    break;
-            } 
-
-         } while (opcao != 0);
+            }
+        } while (opcao != 3);
+        
+        
+        
     }
 }

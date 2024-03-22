@@ -3,18 +3,44 @@ using System;
 using System.Globalization;
 
 namespace Aula01 {
-    class LivroMenu
+    class Biblioteca
     {
         Livro livro = new Livro();
         LivroDAO DAO = new LivroDAO();
+        
+        public void showMenu(int metodo)
+        {
+            switch (metodo)
+            {
+                case 1:
+                    InserirLivro();
+                    break;
+                case 2:
+                    ListarLivros();
+                    break;
+                case 3:
+                    AtualizarLivro();
+                    break;
+                case 4:
+                    DeletarLivro();
+                    break;
+                default:
+                    Console.WriteLine("Saindo...");
+                    break;
+            }
+        }
 
         public void InserirLivro()
         {
             try
             {
+               
                 long Isbn = 0;
                 do
                 {
+                    Console.Clear();
+                    Console.WriteLine("*Inserir livro \n\n ");
+                    
                     Console.WriteLine("*Digite o ISBN do livro (somente números): ");
                     string input = Console.ReadLine();
 
@@ -36,8 +62,6 @@ namespace Aula01 {
                 string Titulo;
                 do
                 {
-                    Console.Clear();
-                    Console.WriteLine("*Inserir livro \n\n ");
 
                     Console.WriteLine("*Digite o nome do Livro: ");
                     livro.setTitulo(Console.ReadLine());
@@ -381,5 +405,6 @@ namespace Aula01 {
             }
            
         }
+        
     }
 }
