@@ -1,14 +1,36 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Aula01 {
-    class AlunoMenu
+    class Secretaria
     {
         Aluno aluno = new Aluno();
         AlunoDao DAO = new AlunoDao();
-
+        
+        public void showMenu(int metodo)
+        {
+            switch(metodo)
+            {
+                case 1:
+                    InserirAluno();
+                    break;
+                case 2:
+                    ListarAlunos();
+                    break;
+                case 3:
+                    AtualizarAluno();
+                    break;
+                case 4:
+                    DeletarAluno();
+                    break;
+                default:
+                    Console.WriteLine("Saindo...");
+                    break;
+            }
+        }
         public void InserirAluno()
         {
             try
