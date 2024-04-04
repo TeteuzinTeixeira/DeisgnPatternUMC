@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
 using Aula_01;
+using Aula_01.menu;
 using Aula01;
 
 class Program
@@ -11,35 +12,33 @@ class Program
 
         Secretaria secretaria = new Secretaria();
         Biblioteca biblioteca = new Biblioteca();
-        
-        int chave = 0;
         int opcao;
-        int metodo;
+        int metodo = 0;
         
 
         do
         {
-            opcao = singleton.DisplayMenu(chave);
+            opcao = singleton.DisplayMenu(metodo);
 
             switch (opcao)
             {
                 case 1:
-                    chave = 1;
-                    metodo = singleton.DisplayMenu(chave);
+                    metodo = 1;
+                    metodo = singleton.DisplayMenu(metodo);
                     if (metodo != 0)
                     {
                         secretaria.showMenu(metodo);
                     }
-                    chave = 0;
+                    metodo = 0;
                     break;
                 case 2:
-                    chave = 2;
-                    metodo = singleton.DisplayMenu(chave);
+                    metodo = 2;
+                    metodo = singleton.DisplayMenu(metodo);
                     if (metodo != 0)
                     {
                         biblioteca.showMenu(metodo);
                     }
-                    chave = 0;
+                    metodo = 0;
                     break;
                 case 3:
                     Console.WriteLine("saindo...");
@@ -51,8 +50,5 @@ class Program
                     break;
             }
         } while (opcao != 3);
-        
-        
-        
     }
 }
