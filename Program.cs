@@ -18,25 +18,25 @@ class Program
 
         do
         {
-            opcao = singleton.DisplayMenu(metodo);
+            opcao = singleton.DisplayMenu(metodo, null);
 
             switch (opcao)
             {
                 case 1:
                     metodo = 1;
-                    metodo = singleton.DisplayMenu(metodo);
+                    metodo = singleton.DisplayMenu(metodo, secretaria);
                     if (metodo != 0)
                     {
-                        secretaria.showMenu(metodo);
+                        //secretaria.showMenu(metodo);
                     }
                     metodo = 0;
                     break;
                 case 2:
                     metodo = 2;
-                    metodo = singleton.DisplayMenu(metodo);
+                    metodo = singleton.DisplayMenu(metodo, biblioteca);
                     if (metodo != 0)
                     {
-                        biblioteca.showMenu(metodo);
+                        //biblioteca.showMenu(metodo);
                     }
                     metodo = 0;
                     break;
@@ -46,7 +46,6 @@ class Program
                 default:
                     Console.WriteLine("Numero invalido");
                     Console.ReadLine();
-                    chave = 0;
                     break;
             }
         } while (opcao != 3);
