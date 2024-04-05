@@ -23,7 +23,7 @@ namespace Aula_01
 
         public int DisplayMenu(int metodo, MenuTemplate menuTemplate)
         {
-            metodo = 0;
+            
             int opcao = 0;
             switch (metodo)
             {
