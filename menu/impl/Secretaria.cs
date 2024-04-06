@@ -3,14 +3,15 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
+using Aula_01.menu;
 
 namespace Aula01 {
-    class Secretaria
+    class Secretaria : MenuTemplate
     {
         Aluno aluno = new Aluno();
         AlunoDao DAO = new AlunoDao();
         
-        public void showMenu(int metodo)
+        protected override void executarAcao(int metodo)
         {
             switch(metodo)
             {
