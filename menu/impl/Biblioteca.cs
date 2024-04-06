@@ -1,14 +1,15 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Globalization;
+using Aula_01.menu;
 
 namespace Aula01 {
-    class Biblioteca
+    class Biblioteca : MenuTemplate
     {
         Livro livro = new Livro();
         LivroDAO DAO = new LivroDAO();
         
-        public void showMenu(int metodo)
+        protected override void executarAcao(int metodo)
         {
             switch (metodo)
             {
@@ -405,6 +406,5 @@ namespace Aula01 {
             }
            
         }
-        
     }
 }

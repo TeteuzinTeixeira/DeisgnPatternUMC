@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Google.Protobuf.Reflection;
+using Aula_01.menu;
 
 namespace Aula_01
 {
-    public sealed class Singleton
+    public sealed class Singleton 
     {
         private Singleton() { }
         private static Singleton? _instance;
@@ -20,49 +16,54 @@ namespace Aula_01
             return _instance;
         }
 
-        public int DisplayMenu(int chave)
+        public int DisplayMenu(int metodo, MenuTemplate menuTemplate)
         {
-            int metodo = 0;
             int opcao = 0;
-            switch(chave)
-            { 
+            switch (metodo)
+            {
                 case 0:
-                Console.Clear();
-                Console.WriteLine("\nSelecione uma operação:");
-                Console.WriteLine("1 - SECRETARIA");
-                Console.WriteLine("2 - BIBLIOTECA\n");
-                Console.WriteLine("3 - Sair");
-                Console.Write("Opcao: ");
-                return opcao = Convert.ToInt32(Console.ReadLine());
-                break;
-                
+                    Console.Clear();
+                    Console.WriteLine("\nSelecione uma operação:");
+                    Console.WriteLine("1 - SECRETARIA");
+                    Console.WriteLine("2 - BIBLIOTECA\n");
+                    Console.WriteLine("3 - Sair");
+                    Console.Write("Opcao: ");
+                    opcao = Convert.ToInt32(Console.ReadLine());
+                    break;
+
                 case 1:
-                Console.WriteLine("\n---------- Aluno ----------\n");
-                Console.WriteLine("1. Inserir aluno");
-                Console.WriteLine("2. Listar alunos");
-                Console.WriteLine("3. Atualizar aluno");
-                Console.WriteLine("4. Deletar aluno");
-                Console.WriteLine("0. Voltar ao menu\n");
-                Console.Write("Opcao: ");
-                return metodo = Convert.ToInt32(Console.ReadLine());
-                break;
-                
+                    Console.WriteLine("\n---------- Aluno ----------\n");
+                    Console.WriteLine("1. Inserir aluno");
+                    Console.WriteLine("2. Listar alunos");
+                    Console.WriteLine("3. Atualizar aluno");
+                    Console.WriteLine("4. Deletar aluno");
+                    Console.WriteLine("0. Voltar ao menu\n");
+                    Console.Write("Opcao: ");
+                    metodo = Convert.ToInt32(Console.ReadLine());
+                    break;
+
                 case 2:
-                Console.WriteLine("\n---------- Livro ----------\n");
-                Console.WriteLine("1. Inserir Livro");
-                Console.WriteLine("2. Listar livros");
-                Console.WriteLine("3. Atualizar livro ");
-                Console.WriteLine("4. Deletar livro");
-                Console.WriteLine("0. Voltar ao menu\n");
-                Console.Write("Opcao: ");
-                return metodo = Convert.ToInt32(Console.ReadLine());
-                break;
-                
+                    Console.WriteLine("\n---------- Livro ----------\n");
+                    Console.WriteLine("1. Inserir Livro");
+                    Console.WriteLine("2. Listar livros");
+                    Console.WriteLine("3. Atualizar livro ");
+                    Console.WriteLine("4. Deletar livro");
+                    Console.WriteLine("0. Voltar ao menu\n");
+                    Console.Write("Opcao: ");
+                    metodo = Convert.ToInt32(Console.ReadLine());
+                    break;
+
                 default:
-                opcao = 0;
-                Console.WriteLine("Saindo...");
-                break;
+                    opcao = 0;
+                    Console.WriteLine("Saindo...");
+                    break;
             }
+
+            if (menuTemplate != null)
+            {
+                menuTemplate.run(metodo);
+            }
+            
             return opcao;
         }
     }
