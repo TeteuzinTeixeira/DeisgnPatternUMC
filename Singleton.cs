@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Aula_01.menu;
-using Google.Protobuf.Reflection;
 
 namespace Aula_01
 {
@@ -23,7 +18,6 @@ namespace Aula_01
 
         public int DisplayMenu(int metodo, MenuTemplate menuTemplate)
         {
-            
             int opcao = 0;
             switch (metodo)
             {
@@ -34,7 +28,7 @@ namespace Aula_01
                     Console.WriteLine("2 - BIBLIOTECA\n");
                     Console.WriteLine("3 - Sair");
                     Console.Write("Opcao: ");
-                    return opcao = Convert.ToInt32(Console.ReadLine());
+                    opcao = Convert.ToInt32(Console.ReadLine());
                     break;
 
                 case 1:
@@ -45,7 +39,7 @@ namespace Aula_01
                     Console.WriteLine("4. Deletar aluno");
                     Console.WriteLine("0. Voltar ao menu\n");
                     Console.Write("Opcao: ");
-                    return metodo = Convert.ToInt32(Console.ReadLine());
+                    metodo = Convert.ToInt32(Console.ReadLine());
                     break;
 
                 case 2:
@@ -56,7 +50,7 @@ namespace Aula_01
                     Console.WriteLine("4. Deletar livro");
                     Console.WriteLine("0. Voltar ao menu\n");
                     Console.Write("Opcao: ");
-                    return metodo = Convert.ToInt32(Console.ReadLine());
+                    metodo = Convert.ToInt32(Console.ReadLine());
                     break;
 
                 default:
